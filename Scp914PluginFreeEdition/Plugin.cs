@@ -1,5 +1,10 @@
 ﻿using System;
+using Exiled.API.Extensions;
 using Exiled.API.Features;
+using Exiled.Events.EventArgs.Scp914;
+using PlayerRoles;
+using Scp914;
+using Random = UnityEngine.Random;
 
 namespace Scp914PluginFreeEdition
 {
@@ -11,12 +16,42 @@ namespace Scp914PluginFreeEdition
 
         public override void OnEnabled()
         {
+            Exiled.Events.Handlers.Scp914.UpgradingPlayer += OnUpgradingPlayer;
             base.OnEnabled();
         }
 
         public override void OnDisabled()
         {
+            Exiled.Events.Handlers.Scp914.UpgradingPlayer -= OnUpgradingPlayer;
             base.OnDisabled();
+        }
+
+        private void OnUpgradingPlayer(UpgradingPlayerEventArgs ev)
+        {
+            var random = Random.Range(0, 100);
+
+            if (ev.KnobSetting == Scp914KnobSetting.VeryFine)
+            {
+                if (random <= 10)
+                {
+                    RoleTypeId roleReference = RoleTypeIdData();
+                    ev.Player.ChangeAppearance(roleReference, skipJump:true);
+                    string message = Config.ChangeRoleBroadcast.Replace("%name%", roleReference.ToString());
+                    ev.Player.Broadcast(5,Config.ChangeRoleBroadcast);
+                }
+            }
+        }
+
+        private RoleTypeId RoleTypeIdData()
+        {
+            RoleTypeId[] role =
+            {
+                RoleTypeId.Scp173, RoleTypeId.ClassD, RoleTypeId.Scp106, RoleTypeId.NtfSpecialist, RoleTypeId.Scp049,
+                RoleTypeId.Scientist, RoleTypeId.ChaosConscript, RoleTypeId.Scp096, RoleTypeId.Scp0492, RoleTypeId.Tutorial,
+                RoleTypeId.FacilityGuard,RoleTypeId.Scp939,RoleTypeId.ChaosRifleman, RoleTypeId.Scp3114
+            };
+            var newRole = role[UnityEngine.Random.Range(0, role.Length)];
+            return newRole;
         }
     }
 }
