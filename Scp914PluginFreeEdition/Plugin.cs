@@ -1,9 +1,12 @@
 ﻿using System;
+using CustomPlayerEffects;
 using Exiled.API.Extensions;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Scp914;
+using MEC;
 using PlayerRoles;
 using Scp914;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Scp914PluginFreeEdition
@@ -33,6 +36,13 @@ namespace Scp914PluginFreeEdition
             if (ev.KnobSetting == Scp914KnobSetting.VeryFine)
             {
                 if (random <= 10)
+                {
+                    ev.Player.Scale = new Vector3(0.5f, 0.5f, 0.5f);
+                    ev.Player.EnableEffect<MovementBoost>(duration: 30, intensity: 50);
+                    ev.Player.Broadcast(5,Config.SizeSmallBroadcast);
+                    Timing.CallDelayed(30, () => ev.Player.Scale = new Vector3(1f, 1f, 1f));
+                }
+                else if (random <= 40)
                 {
                     RoleTypeId roleReference = RoleTypeIdData();
                     ev.Player.ChangeAppearance(roleReference, skipJump:true);

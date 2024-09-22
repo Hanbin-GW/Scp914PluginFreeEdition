@@ -12,5 +12,7 @@ namespace Scp914PluginFreeEdition
 
         [Description("Veryfine 랜덤 효과")]
         public string ChangeRoleBroadcast { get; set; } = "당신의 외형은 %name% 로 변경되었습니다.";
+        [Description("Veryfine 랜덤 효과")]
+        public string SizeSmallBroadcast { get; set; } = "당신은 30초동안 작아지고 빨라집니다.";
     }
 }
