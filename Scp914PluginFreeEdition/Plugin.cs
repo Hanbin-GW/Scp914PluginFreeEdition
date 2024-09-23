@@ -57,7 +57,7 @@ namespace Scp914PluginFreeEdition
                 }
                 else
                 {
-                    ev.Player.Broadcast(5,"당신의 몸은 부식되고 있습니다....");
+                    ev.Player.Broadcast(5,"<size=30><color=red>당신의 몸은 부식되고 있습니다....</color></size>");
                     ev.Player.EnableEffect<CardiacArrest>(duration: 5);
                     Timing.CallDelayed(5, () => ev.Player.Role.Set(RoleTypeId.Scp3114));
                 }
