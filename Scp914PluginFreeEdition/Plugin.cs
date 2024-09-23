@@ -15,7 +15,7 @@ namespace Scp914PluginFreeEdition
     {
         public override string Name { get; } = "Scp914Plugin-Free edition";
         public override string Author { get; } = "Hanbin-GW";
-        public override Version Version { get; } = new Version(0, 1, 0);
+        public override Version Version { get; } = new Version(0, 2, 0);
 
         public override void OnEnabled()
         {
@@ -49,6 +49,18 @@ namespace Scp914PluginFreeEdition
                     string message = Config.ChangeRoleBroadcast.Replace("%name%", roleReference.ToString());
                     ev.Player.Broadcast(5,Config.ChangeRoleBroadcast);
                 }
+                else if (random <= 90)
+                {
+                    ev.Player.EnableEffect<Slowness>(duration: 30, intensity: 30);
+                    ev.Player.EnableEffect<DamageReduction>(duration: 30, intensity: 50);
+                    ev.Player.Broadcast(5,Config.TankerBroadcast); 
+                }
+                else
+                {
+                    ev.Player.Broadcast(5,"당신의 몸은 부식되고 있습니다....");
+                    ev.Player.EnableEffect<CardiacArrest>(duration: 5);
+                    Timing.CallDelayed(5, () => ev.Player.Role.Set(RoleTypeId.Scp3114));
+                }
             }
         }
 
@@ -60,7 +72,7 @@ namespace Scp914PluginFreeEdition
                 RoleTypeId.Scientist, RoleTypeId.ChaosConscript, RoleTypeId.Scp096, RoleTypeId.Scp0492, RoleTypeId.Tutorial,
                 RoleTypeId.FacilityGuard,RoleTypeId.Scp939,RoleTypeId.ChaosRifleman, RoleTypeId.Scp3114
             };
-            var newRole = role[UnityEngine.Random.Range(0, role.Length)];
+            var newRole = role[Random.Range(0, role.Length)];
             return newRole;
         }
     }
