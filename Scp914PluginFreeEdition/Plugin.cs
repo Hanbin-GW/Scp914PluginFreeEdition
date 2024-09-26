@@ -17,7 +17,7 @@ namespace Scp914PluginFreeEdition
     {
         public override string Name { get; } = "Scp914Plugin-Free edition";
         public override string Author { get; } = "Hanbin-GW";
-        public override Version Version { get; } = new Version(0, 2, 2);
+        public override Version Version { get; } = new Version(0, 3, 0);
 
         public override void OnEnabled()
         {
