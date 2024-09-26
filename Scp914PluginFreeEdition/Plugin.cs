@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using CustomPlayerEffects;
+using Exiled.API.Enums;
 using Exiled.API.Extensions;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Scp914;
@@ -32,6 +34,13 @@ namespace Scp914PluginFreeEdition
         private void OnUpgradingPlayer(UpgradingPlayerEventArgs ev)
         {
             var random = Random.Range(0, 100);
+            Scp914KnobSetting scp914KnobSetting = ev.KnobSetting;
+            
+            foreach (Player player in Player.List.Where(p => p.CurrentRoom.Type == RoomType.Lcz914))
+            {
+                // Notify the player about the current knob setting
+                player.Broadcast(5, $"SCP-914 is set to: {scp914KnobSetting}");
+            }
 
             if (ev.KnobSetting == Scp914KnobSetting.VeryFine)
             {
