@@ -4,6 +4,7 @@ using CustomPlayerEffects;
 using Exiled.API.Enums;
 using Exiled.API.Extensions;
 using Exiled.API.Features;
+using Exiled.API.Features.Items;
 using Exiled.Events.EventArgs.Scp914;
 using MEC;
 using PlayerRoles;
@@ -17,7 +18,7 @@ namespace Scp914PluginFreeEdition
     {
         public override string Name { get; } = "Scp914Plugin-Free edition";
         public override string Author { get; } = "Hanbin-GW";
-        public override Version Version { get; } = new Version(0, 3, 0);
+        public override Version Version { get; } = new Version(0, 3, 1);
 
         public override void OnEnabled()
         {
@@ -42,7 +43,7 @@ namespace Scp914PluginFreeEdition
                 player.Broadcast(5, $"SCP-914 is set to: {scp914KnobSetting}");
             }
 
-            if (ev.KnobSetting == Scp914KnobSetting.VeryFine)
+            if (ev.KnobSetting == Scp914KnobSetting.VeryFine && ev.Player.IsHuman)
             {
                 if (random <= 10)
                 {
@@ -70,7 +71,17 @@ namespace Scp914PluginFreeEdition
                     ev.Player.EnableEffect<CardiacArrest>(duration: 5);
                     Timing.CallDelayed(5, () => ev.Player.Role.Set(RoleTypeId.Scp3114));
                 }
+
+                if (ev.KnobSetting == Scp914KnobSetting.OneToOne && ev.Player.IsHuman)
+                {
+                    if (random <= 10)
+                    {
+                        ev.Player.Broadcast(5,"<color=red>dafuq boom</color>");
+                        ((ExplosiveGrenade)Item.Create(ItemType.GrenadeHE)).SpawnActive(ev.Player.Position, ev.Player);
+                    }
+                }
             }
+            
         }
 
         private RoleTypeId RoleTypeIdData()
