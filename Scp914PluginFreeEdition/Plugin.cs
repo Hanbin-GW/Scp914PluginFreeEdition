@@ -79,6 +79,12 @@ namespace Scp914PluginFreeEdition
                         ev.Player.Broadcast(5,"<color=red>dafuq boom</color>");
                         ev.Player.Explode();
                     }
+
+                    if (random <= 20)
+                    {
+                        ev.Player.Broadcast(5,"Flash!!!");
+                        ev.Player.EnableEffect<Flashed>(duration: 5);
+                    }
                 }
             }
             
