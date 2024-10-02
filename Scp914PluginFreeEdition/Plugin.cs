@@ -77,7 +77,7 @@ namespace Scp914PluginFreeEdition
                     if (random <= 10)
                     {
                         ev.Player.Broadcast(5,"<color=red>dafuq boom</color>");
-                        ((ExplosiveGrenade)Item.Create(ItemType.GrenadeHE)).SpawnActive(ev.Player.Position, ev.Player);
+                        ev.Player.Explode();
                     }
                 }
             }
