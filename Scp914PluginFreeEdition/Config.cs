@@ -16,5 +16,7 @@ namespace Scp914PluginFreeEdition
         public string SizeSmallBroadcast { get; set; } = "당신은 30초동안 작아지고 빨라집니다.";
         [Description("Veryfine 랜덤 효과")]
         public string TankerBroadcast { get; set; } = "당신은 30초동안 탱커입니다!\n이동속도 감소 + 대미지 저항 감소";
+        [Description("1:1 랜덤 효과")]
+        public string Invincibility { get; set; } = "당신은 60초동안 무적입니다!!!";
     }
 }

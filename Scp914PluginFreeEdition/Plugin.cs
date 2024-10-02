@@ -4,7 +4,6 @@ using CustomPlayerEffects;
 using Exiled.API.Enums;
 using Exiled.API.Extensions;
 using Exiled.API.Features;
-using Exiled.API.Features.Items;
 using Exiled.Events.EventArgs.Scp914;
 using MEC;
 using PlayerRoles;
@@ -18,7 +17,7 @@ namespace Scp914PluginFreeEdition
     {
         public override string Name { get; } = "Scp914Plugin-Free edition";
         public override string Author { get; } = "Hanbin-GW";
-        public override Version Version { get; } = new Version(0, 3, 1);
+        public override Version Version { get; } = new Version(0, 3, 2);
 
         public override void OnEnabled()
         {
@@ -67,7 +66,7 @@ namespace Scp914PluginFreeEdition
                 }
                 else
                 {
-                    ev.Player.Broadcast(5,"<size=30><color=red>당신의 몸은 부식되고 있습니다....</color></size>");
+                    ev.Player.Broadcast(5,"<size=30><color=red>당신의 몸은 부식되고 있습니다....\n당신은 갑자기 누군가를 죽여버리고 싶어합니다...</color></size>");
                     ev.Player.EnableEffect<CardiacArrest>(duration: 5);
                     Timing.CallDelayed(5, () => ev.Player.Role.Set(RoleTypeId.Scp3114));
                 }
@@ -76,15 +75,28 @@ namespace Scp914PluginFreeEdition
                 {
                     if (random <= 10)
                     {
-                        ev.Player.Broadcast(5,"<color=red>dafuq boom</color>");
-                        ev.Player.Explode();
+                        ev.Player.Broadcast(5,"<color=red>Dafuq</color>");
+                        Timing.CallDelayed(5, ()=>ev.Player.Explode());
+                        ev.Player.Broadcast(5,"<size=50><color=red>BOOM</color></size>");
                     }
 
                     if (random <= 20)
                     {
-                        ev.Player.Broadcast(5,"Flash!!!");
+                        ev.Player.Broadcast(5,"<color=#000000>Flash!!!</color>");
                         ev.Player.EnableEffect<Flashed>(duration: 5);
                     }
+
+                    if (random <= 25)
+                    {
+                        ev.Player.Broadcast(5,Config.Invincibility);
+                        ev.Player.EnableEffect<DamageReduction>(intensity: 100,duration:60);
+                    }
+                }
+
+                if (ev.KnobSetting == Scp914KnobSetting.Coarse)
+                {
+                    int courseRandom = Random.Range(0, 200);
+                    ev.Player.Broadcast(5,"<size=33>곧 특수기능이 추가될 예정입니다!</size>");
                 }
             }
             
