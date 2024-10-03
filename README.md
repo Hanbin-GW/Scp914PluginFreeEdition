@@ -28,3 +28,13 @@
 
 ### Course
 #### <span style="color:red">Working in Progress</span>
+
+
+
+
+
+
+
+# If you want a premiem version you should join our discord server and donate 30000₩ KRW
+
+<a href="https://discord.gg/aYyNucAfqE">Join the Ghost Server</a>
