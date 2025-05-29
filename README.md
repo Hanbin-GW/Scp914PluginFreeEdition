@@ -35,6 +35,6 @@
 
 
 
-# If you want a premiem version you should join our discord server and donate 30000₩ KRW
+# To enjoy our premium service, we kindly ask for a donation of 30,000 KRW."
 
 <a href="https://discord.gg/aYyNucAfqE">Join the Ghost Server</a>
